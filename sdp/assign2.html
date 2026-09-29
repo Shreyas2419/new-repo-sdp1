@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Innovation Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800;900&display=swap');
+
+        :root {
+            --primary: #1a73e8;
+            --secondary: #d93025;
+            --gemini-purple: #a142f4;
+            --gemini-blue: #8ab4f8;
+            --text-dark: #1e293b;
+            --bg-gray: #f4f7fe;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body { background-color: var(--bg-gray); color: var(--text-dark); overflow-x: hidden; }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-weight: 900; font-size: 1.8rem;
+            background: linear-gradient(to right, var(--primary), var(--gemini-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        nav ul { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+        nav ul li a { text-decoration: none; color: var(--text-dark); font-weight: 600; text-transform: uppercase; font-size: 0.9rem; transition: color 0.3s; }
+        nav ul li a:hover { color: var(--gemini-purple); }
+
+        /* Hero */
+        header {
+            min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            padding: 0 20px;
+            background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center; background-attachment: fixed; color: white;
+        }
+
+        .hero-glass-box {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1); padding: 5rem 4rem; border-radius: 30px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5); max-width: 1000px; width: 100%;
+        }
+
+        header h1 {
+            font-size: 5rem; font-weight: 900; margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #ffffff, var(--gemini-blue));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .hero-divider {
+            width: 120px; height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--gemini-purple));
+            margin: 1.5rem auto 2rem; border-radius: 10px;
+        }
+
+        header h2 { font-size: 1.8rem; color: var(--gemini-blue); font-weight: 800; margin-bottom: 0.5rem; }
+        header h3 { font-size: 1.2rem; color: #94a3b8; font-weight: 500; letter-spacing: 2px; }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 6rem 2rem; }
+        .section-title { text-align: center; font-size: 3.5rem; font-weight: 900; margin-bottom: 3rem; }
+        .section-title span { background: linear-gradient(to right, var(--primary), var(--gemini-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* ========================================= */
+        /* --- NEXT-GEN AI PATH SELECTOR (NEW) --- */
+        /* ========================================= */
+        
+        .path-selector-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 5rem;
+        }
+
+        /* Pulsating AI Prompt Badge */
+        .ai-prompt-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 25px;
+            background: rgba(161, 66, 244, 0.1);
+            border: 1px solid rgba(161, 66, 244, 0.4);
+            border-radius: 50px;
+            color: var(--gemini-purple);
+            font-size: 0.95rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 20px rgba(161, 66, 244, 0.2);
+            animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(161, 66, 244, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(161, 66, 244, 0.5); border-color: rgba(161, 66, 244, 0.7); }
+        }
+
+        /* Dark Glass Floating Capsule for Buttons */
+        .nextgen-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            background: rgba(15, 23, 42, 0.9); /* Dark tech capsule */
+            padding: 12px;
+            border-radius: 50px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2), inset 0 0 20px rgba(161, 66, 244, 0.1);
+        }
+
+        @media(max-width: 768px) {
+            .nextgen-filters { border-radius: 20px; }
+        }
+
+        .nextgen-btn {
+            position: relative;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 14px 30px;
+            border-radius: 40px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .nextgen-btn i { font-size: 1.3rem; transition: 0.3s; }
+
+        /* Hover & Active Glowing States */
+        .nextgen-btn:hover { color: white; background: rgba(255,255,255,0.05); }
+
+        .nextgen-btn.active {
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--gemini-purple));
+            box-shadow: 0 10px 25px rgba(161, 66, 244, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Rotating inner glow for active AI button */
+        .nextgen-btn.active .btn-glow {
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+            animation: rotateBtnGlow 4s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotateBtnGlow {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* --- Project Cards with Unbreakable Images --- */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; }
+
+        .project-card {
+            background: white; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05); transition: all 0.4s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px); box-shadow: 0 30px 60px rgba(161, 66, 244, 0.15);
+            border-color: var(--gemini-purple);
+        }
+
+        .img-container { width: 100%; height: 240px; background: #1e293b; border-bottom: 4px solid var(--primary); overflow: hidden; }
+        .project-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .project-card:hover .project-image { transform: scale(1.05); }
+
+        .project-content { padding: 2.5rem; }
+        .tag {
+            display: inline-block; padding: 6px 15px; background: rgba(161, 66, 244, 0.1);
+            color: var(--gemini-purple); border-radius: 30px; font-size: 0.8rem; font-weight: 800; margin-bottom: 1rem;
+        }
+        .project-content h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .project-content p { color: #475569; line-height: 1.7; }
+
+        /* Team Grid */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; }
+        .team-card { text-align: center; padding: 3rem 2rem; border-radius: 20px; background: white; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s; }
+        .team-card:hover { transform: translateY(-5px); border-color: var(--gemini-purple); }
+        .avatar-circle { width: 130px; height: 130px; border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; color: white; background: linear-gradient(135deg, var(--primary), var(--secondary)); }
+
+        /* --- Command Center / Login Section --- */
+        .access-section { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
+        @media(max-width: 768px) { .access-section { grid-template-columns: 1fr; } }
+
+        .info-panel, .login-panel {
+            background: white; padding: 3rem; border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05); border-top: 5px solid var(--gemini-purple);
+        }
+
+        .info-panel h3, .login-panel h3 { font-size: 2.2rem; color: var(--text-dark); margin-bottom: 2rem; font-weight: 900; }
+        .info-panel p { font-size: 1.1rem; color: #475569; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 15px; }
+        .info-panel i { color: var(--gemini-purple); font-size: 1.5rem; width: 25px; }
+
+        input {
+            width: 100%; padding: 16px 20px; margin-bottom: 20px;
+            background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 12px;
+            font-size: 1rem; outline: none; transition: all 0.3s;
+        }
+        input:focus { border-color: var(--gemini-purple); background: white; box-shadow: 0 0 0 4px rgba(161, 66, 244, 0.15); }
+
+        button {
+            width: 100%; padding: 18px; background: linear-gradient(45deg, var(--primary), var(--gemini-purple));
+            color: white; border: none; border-radius: 12px; font-size: 1.2rem;
+            font-weight: 800; cursor: pointer; transition: all 0.3s;
+        }
+        button:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(161, 66, 244, 0.4); }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">INNOVATE HUB</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#projects">Explore Routes</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#join" style="background: linear-gradient(45deg, var(--primary), var(--gemini-purple)); color: white; padding: 10px 24px; border-radius: 50px; font-weight: bold;"><i class="fa-solid fa-users"></i> Join Hub</a></li>
+        </ul>
+    </nav>
+
+    <header id="home">
+        <div class="hero-glass-box">
+            <h1>STUDENT INNOVATION HUB</h1>
+            <div class="hero-divider"></div>
+            <h2>Department of Computer Science Engineering</h2>
+            <h3>The National Institute of Engineering</h3>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <h2 class="section-title" id="projects">Choose Your <span>Innovation Path</span></h2>
+        
+        <!-- NEW NEXT-GEN AI PATH SELECTOR -->
+        <div class="path-selector-container">
+            <div class="ai-prompt-badge">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> System Protocol: Select Discipline
+            </div>
+            
+            <div class="nextgen-filters">
+                <button class="nextgen-btn active" onclick="filterProjects('all')">
+                    <span class="btn-glow"></span>
+                    <i class="fa-solid fa-layer-group"></i> Entire Hub
+                </button>
+                <button class="nextgen-btn" onclick="filterProjects('simulation')">
+                    <span class="btn-glow"></span>
+                    <i class="fa-solid fa-solar-panel"></i> Simulations
+                </button>
+                <button class="nextgen-btn" onclick="filterProjects('software')">
+                    <span class="btn-glow"></span>
+                    <i class="fa-solid fa-code"></i> Software
+                </button>
+                <button class="nextgen-btn" onclick="filterProjects('hardware')">
+                    <span class="btn-glow"></span>
+                    <i class="fa-solid fa-microchip"></i> Hardware
+                </button>
+                <button class="nextgen-btn" onclick="filterProjects('ai')">
+                    <span class="btn-glow"></span>
+                    <i class="fa-solid fa-brain"></i> AI / Cyber
+                </button>
+            </div>
+        </div>
+
+        <div class="project-grid">
+            
+            <!-- Guaranteed Image Generation Fallbacks -->
+            <div class="project-card" data-category="simulation">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1509391366360-12009a308569?auto=format&fit=crop&w=800&q=80" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/800x500/1e293b/8ab4f8?text=Solar+MPPT+Simulation';" 
+                         alt="Solar Panels" class="project-image">
+                </div>
+                <div class="project-content">
+                    <span class="tag">MATLAB Simulation</span>
+                    <h3>Solar MPPT Optimization</h3>
+                    <p>Mathematical derivation and technical simulation analyzing solar power output stability under varying irradiance.</p>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="software">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null; this.src='https://placehold.co/800x500/1e293b/8ab4f8?text=React+Dashboard';" alt="React Code" class="project-image">
+                </div>
+                <div class="project-content">
+                    <span class="tag">Web Architecture</span>
+                    <h3>React Campus Ecosystem</h3>
+                    <p>A high-performance, full-stack responsive web application engineered to centralize student resources and schedules.</p>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="ai">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null; this.src='https://placehold.co/800x500/1e293b/8ab4f8?text=AI+Neural+Grid';" alt="AI Neural Net" class="project-image">
+                </div>
+                <div class="project-content">
+                    <span class="tag">Machine Learning</span>
+                    <h3>Neuro-Symbolic AI Grid</h3>
+                    <p>Developed a hybrid artificial intelligence framework capable of processing natural language commands autonomously.</p>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="hardware">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null; this.src='https://placehold.co/800x500/1e293b/8ab4f8?text=Laser+Diffraction';" alt="Laser Lab" class="project-image">
+                </div>
+                <div class="project-content">
+                    <span class="tag">Applied Physics</span>
+                    <h3>Laser Diffraction Analysis</h3>
+                    <p>Academic research determining laser light wavelengths using a diffraction grating, perfectly supported by Fraunhofer tables.</p>
+                </div>
+            </div>
+            
+            <div class="project-card" data-category="ai">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null; this.src='https://placehold.co/800x500/1e293b/8ab4f8?text=Cyber+Security';" alt="Cyber Security" class="project-image">
+                </div>
+                <div class="project-content">
+                    <span class="tag">Cybersecurity</span>
+                    <h3>Quantum Encryption Protocol</h3>
+                    <p>A simulated end-to-end encryption software testing quantum-resistant cryptography methods to secure networks.</p>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="simulation">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null; this.src='https://placehold.co/800x500/1e293b/8ab4f8?text=CAED+Design';" alt="CAED Software" class="project-image">
+                </div>
+                <div class="project-content">
+                    <span class="tag">Engineering Design</span>
+                    <h3>Solid Edge Dynamics</h3>
+                    <p>Complex computer-aided engineering drafting, featuring intricate orthographic and isometric projections.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Fully Populated Team Section -->
+        <div id="team" style="margin-top: 5rem;">
+            <h2 class="section-title">Core <span>Innovators</span></h2>
+            <div class="team-grid">
+                
+                <div class="team-card">
+                    <div class="avatar-circle"><i class="fa-solid fa-user-astronaut"></i></div>
+                    <h3>Shreyas M S</h3>
+                    <p style="color: var(--primary); font-weight:bold;">Lead CSE Developer</p>
+                    <p style="color: #64748b;">Spearheading software development, system architecture, and complex integrations.</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="avatar-circle" style="background: linear-gradient(135deg, var(--gemini-purple), var(--primary));"><i class="fa-solid fa-laptop-code"></i></div>
+                    <h3>Ananya Rao</h3>
+                    <p style="color: var(--primary); font-weight:bold;">UI/UX & Frontend Lead</p>
+                    <p style="color: #64748b;">Designing intuitive interfaces and crafting seamless user experiences across all platforms.</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="avatar-circle" style="background: linear-gradient(135deg, #10b981, #3b82f6);"><i class="fa-solid fa-microchip"></i></div>
+                    <h3>Rahul Verma</h3>
+                    <p style="color: var(--primary); font-weight:bold;">Hardware & IoT Specialist</p>
+                    <p style="color: #64748b;">Building robust hardware prototypes, embedded systems, and automated sensor networks.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="join" style="margin-top: 5rem;">
+            <h2 class="section-title">Command <span>Center</span></h2>
+            
+            <div class="access-section">
+                <!-- Left: Directory (Contact Section) -->
+                <div class="info-panel">
+                    <h3>Hub Directory</h3>
+                    <p><i class="fa-solid fa-user-tie"></i> <strong>Lead Developer:</strong> Shreyas M S</p>
+                    <p><i class="fa-solid fa-university"></i> <strong>Institution:</strong> NIE Mysuru</p>
+                    <p><i class="fa-solid fa-mobile-screen-button"></i> <strong>Contact Line:</strong> 6362393296</p>
+                    <p><i class="fa-solid fa-envelope"></i> <strong>Email:</strong> innovate.cse@nie.edu</p>
+                </div>
+
+                <!-- Right: Team Member Login / Join -->
+                <div class="login-panel">
+                    <h3>Team Member Portal</h3>
+                    <p style="font-size: 0.95rem; margin-bottom: 2rem; color: #64748b;">Current innovators and new student members can log in or join using their credentials.</p>
+                    
+                    <form onsubmit="event.preventDefault(); alert('Verifying credentials for the Innovation Hub...');">
+                        <input type="text" placeholder="Username" required>
+                        <input type="text" placeholder="College ID Number (e.g. 4NI...)" required>
+                        <input type="password" placeholder="Secure Password" required>
+                        <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Authenticate / Join</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Category Filter Script -->
+    <script>
+        function filterProjects(category) {
+            // Target the new nextgen buttons
+            document.querySelectorAll('.nextgen-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            const cards = document.querySelectorAll('.project-card');
+            
+            cards.forEach(card => {
+                card.style.transform = 'scale(0.8) translateY(30px)';
+                card.style.opacity = '0';
+                
+                setTimeout(() => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.transform = 'scale(1) translateY(0)';
+                            card.style.opacity = '1';
+                        }, 50);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }, 400); 
+            });
+        }
+    </script>
+</body>
+</html>
